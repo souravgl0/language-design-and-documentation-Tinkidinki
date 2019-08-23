@@ -1,0 +1,35 @@
+classProgram{
+
+    char ch;
+    int as;
+    int pos = 0;
+    int hist[26];
+
+    void main()
+
+        while(c!=EOF){
+            c = callout("readFile", filename, pos);
+            as = callout("asciiOf", c);
+
+            if (as>=65 && as<=90) {
+                hist[as-65] = hist[as-65] + 1;
+            }
+            else {
+                if (as>=97 && as<=122){
+                    hist[as-97] = hist[as-97] + 1;
+                }
+            }
+
+            pos = pos + 1;
+        }
+
+        int i; 
+        for(i = 0; i<=26; i = i+1){
+            ch = callout("charOf", 65+i);
+            callout("print", "char", ch);
+            callout("print", "int", hist[i]);
+            callout("print", "\n");
+        }
+
+    }
+}

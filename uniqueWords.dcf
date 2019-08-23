@@ -1,0 +1,70 @@
+classProgram{
+	
+	int uniqueCount;
+	int wordLengths[10000];
+	char currWord[100];
+	int currLength;
+	char words[10000][100];
+	int pos;
+	bool isNew;
+	int numWords; 
+	int currWordPos;
+
+	char[100] readWord(){
+		char c;
+		c = '';
+		currWordPos = 0;
+		pos = pos + 1;
+		while(c!=' ' && c!=EOF)
+			c = callout("readWord", filename, pos);
+			currWord[currWordPos] = c;
+			currWordPos = currWordPos + 1;
+			pos = pos + 1;
+		}
+		return currWord;
+	}
+
+	bool checkExists(char[100] currWord, int currLength){
+		int i;
+		bool exists;
+		exists = true;
+		for(i = 0; i<numWords; i++){
+			if (wordLengths[i] == currLength){
+				for(j = 0; j< currLength; j++){
+					if (words[i][j] != currWord[j])){
+						exists = false;
+					}
+				}	
+			}	 
+			else {
+				exists = false;
+			}
+		}
+		return exists;
+	}
+
+	void addWord(char[100] currWord, int currLength){
+		for(i = 0; i< currLength; i++){
+			words[numWords][i] = currWord[i];
+		}
+		wordLengths[numWords] = currLength;
+	}
+
+	void main(){
+		pos = 0;
+		int oldpos;
+		while(true){
+			oldpos = pos;
+			currWord = callout("readWord");
+			currLength = pos - oldpos;
+			isNew = callout("checkExists", currWord, currLength);
+			
+			if(isNew){
+				callout("addWord")
+				numWords = numWords + 1;
+			}
+			
+		}
+	}
+    
+}

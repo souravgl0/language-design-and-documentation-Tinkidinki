@@ -1,0 +1,32 @@
+class Program
+{
+  int power(int a, int k)
+  {
+    int answer;
+    int i;
+    answer = 1;
+    for(i = 1; i <= k; i = i + 1)
+    {
+      answer = answer * a;
+    }
+    return answer;
+  }
+  void main()
+  {
+    int N;
+    int k;
+    int answer;
+    int i;
+    answer = 0;
+    callout("print", "Enter N: ");
+    N = callout("read", "int");
+    callout("print", "Enter k: ");
+    k = callout("read", "int");
+    for(i = 1; i <= N; i = i + 1)
+    {
+      answer = answer + callout("power",i,k);
+    }
+    callout("print", "Answer: ");
+    callout("print", "int", answer);
+  }
+}

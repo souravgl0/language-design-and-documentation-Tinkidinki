@@ -1,0 +1,32 @@
+class Program
+{
+  void main()
+  {
+    int N;
+    int i;
+    callout("print", "Enter N: ");
+    N = callout("read", "int");
+    if(N == 1)
+    {
+      callout("print", "1 is neither prime nor composite");
+      return;
+    }
+    callout("print", "int", N);
+    if(N == 2 || N == 3)
+    {
+      callout("print", " is a prime number");
+      return;
+    }
+
+    for(i = 2; i <= N / 2; i = i + 1)
+    {
+      if(N % i == 0)
+      {
+        callout("print", " is NOT a prime number");
+        return;
+      }
+    }
+    callout("print", "is a prime number");
+    return;
+  }
+}

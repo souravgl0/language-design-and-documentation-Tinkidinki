@@ -1,0 +1,60 @@
+class Program
+{
+  int N;
+  int arr[1000000];
+
+  void swap(int i1, int i2)
+  {
+    int temp;
+    temp = arr[i1];
+    arr[i1] = arr[i2];
+    arr[i2] = temp;
+    return;
+  }
+
+  void printArray()
+  {
+    int i;
+    for(i = 0; i < N; i = i + 1)
+    {
+      callout("print", "int", arr[i]);
+      callout("print", " ");
+    }
+    return;
+  }
+  void heapPermutation(int size)
+  {
+    int i;
+    if(size == 1)
+    {
+      callout("printArray");
+      return;
+    }
+    for(i = 0; i < size; i = i + 1)
+    {
+      heapPermutation(size - 1);
+
+      if(size % 2 == 1)
+      {
+        callout("swap", 0, size - 1);
+      }
+      else
+      {
+        callout("swap", i, size - 1);
+      }
+    }
+    return;
+  }
+  void main()
+  {
+    int i;
+    callout("print", "Enter N(max = 1000000): ");
+    N = callout("read", "int");
+    for(i = 0; i < N; i = i + 1)
+    {
+      arr[i] = i + 1;
+    }
+    callout("heapPermutation", N);
+    return;
+  }
+}

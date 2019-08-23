@@ -1,0 +1,68 @@
+class Program
+{
+  int r1, r2, c1, c2;
+  int a[1000][1000], b[1000][1000];
+  int c[1000][1000];
+
+  void printMatrix()
+  {
+    int i, j;
+    for(i = 0; i < r1; i = i + 1)
+    {
+      callout("print", "\n");
+      for(j = 0; j < c1; j = j + 1)
+      {
+        callout("print", "int", c[i][j]);
+        callout("print", " ");
+      }
+    }
+    return;
+  }
+
+  void main()
+  {
+    int i, j;
+    callout("print","Enter number of rows of Matrix1(max = 1000): ");
+    r1 = callout("read", "int");
+    callout("print","Enter number of columns of Matrix1(max = 1000): ");
+    c1 = callout("read", "int");
+    callout("print","Enter number of rows of Matrix2(max = 1000): ");
+    r2 = callout("read", "int");
+    callout("print","Enter number of columns of Matrix2(max = 1000): ");
+    c2 = callout("read", "int");
+
+    if(r1 != r2 || c1 != c2)
+    {
+      callout("print","Incompatible Matrices: Cannot add matrices of different dimensions");
+      return;
+    }
+
+    callout("print", "Enter values of Matrix 1(row-wise): ");
+    for(i = 0; i < r1; i = i + 1)
+    {
+      for(j = 0; j < c1; j = j + 1)
+      {
+        a[i][j] = callout("read", "int");
+      }
+    }
+
+    callout("print", "Enter values of Matrix 2(row-wise): ");
+    for(i = 0; i < r2; i = i + 1)
+    {
+      for(j = 0; j < c2; j = j + 1)
+      {
+        b[i][j] = callout("read", "int");
+      }
+    }
+    callout("print", "Evaluating Sum: ");
+    for(i = 0; i < r1; i = i + 1)
+    {
+      for(j = 0; j < c1; j = j + 1)
+      {
+        c[i][j] = a[i][j] + b[i][j];
+      }
+    }
+    callout("printMatrix");
+    return;
+  }
+}

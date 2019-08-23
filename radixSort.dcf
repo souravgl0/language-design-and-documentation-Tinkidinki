@@ -1,0 +1,90 @@
+class Program
+{
+  int N;
+  int arr[1000000];
+
+  void printArray()
+  {
+    int i;
+    for(i = 0; i < N; i = i + 1)
+    {
+      callout("print", "int", arr[i]);
+      callout("print", " ");
+    }
+    return;
+  }
+
+  int getMax()
+  {
+    int i;
+    int answer;
+    answer = arr[0];
+    for(i = 1; i < N; i = i + 1)
+    {
+      if(answer < arr[i])
+      {
+        answer = arr[i];
+      }
+    }
+    return answer;
+  }
+
+  void countSort(int exp)
+  {
+    int output[1000000];
+    int count[10];
+    int i;
+    int index;
+
+    for(i = 0; i < 10; i = i + 1)
+    {
+      count[i] = 0;
+    }
+
+    for(i = 0; i < N; i = i + 1)
+    {
+      index = (arr[i] / exp) % 10;
+      count[index] = count[index] + 1;
+    }
+
+    for(i = N - 1; i >= 0; i = i - 1)
+    {
+      index = (arr[i] / exp) % 10;
+      output[count[index] - 1] = arr[i];
+      count[index] = count[index] - 1;
+    }
+
+    for(i = 0; i < N; i = i + 1)
+    {
+      arr[i] = output[i];
+    }
+    return;
+  }
+  void radixSort()
+  {
+    int m, exp;
+    m = callout("getMax");
+
+    for(exp = 1; m/exp > 0; exp = exp * 10)
+    {
+      callout("countSort", exp);
+    }
+    return;
+  }
+
+  void main()
+  {
+    int i;
+    callout("print", "Enter N(max = 1000000): ")
+    N = callout("read", "int");
+    callout("print", "Enter elements: ");
+    for(i = 0; i < N; i = i + 1)
+    {
+      arr[i] = callout("read", "int");
+    }
+    callout("radixSort");
+    callout("print", "\nAfter Sorting: ");
+    callout("printArray");
+    return;
+  }
+}

@@ -1,0 +1,48 @@
+class Program
+{
+  int N;
+  int arr[1000000];
+
+  void printArray()
+  {
+    int i;
+    for(i = 0; i < N; i = i + 1)
+    {
+      callout("print", "int", arr[i]);
+      callout("print", " ");
+    }
+    return;
+  }
+
+  void insertionSort()
+  {
+    int i, key, j;
+    for(i = 1; i < N; i = i + 1)
+    {
+      key = arr[i];
+      j = i - 1;
+      while(j >= 0 && arr[j] > key)
+      {
+        arr[j + 1] = arr[j];
+      }
+      arr[j + 1] = key;
+    }
+    return;
+  }
+
+  void main()
+  {
+    int i;
+
+    callout("print", "Enter N(max = 1000000): ");
+    N = callout("read", "int");
+    for(i = 0; i < N; i = i + 1)
+    {
+      arr[i] = callout("read", "int");
+    }
+    callout("insertionSort");
+    callout("print", "\nAfter Sorting: ");
+    callout("printArray");
+    return;
+  }
+}

@@ -1,0 +1,36 @@
+class Program
+{
+  int N;
+  boolean sieve[1000000];
+
+  void main()
+  {
+    int i, j;
+    int answer;
+    answer = 0;
+    callout("print", "Enter N (max = 1000000): ");
+    N = callout("read", "int");
+    for(i = 2; i < N; i = i + 1)
+    {
+      sieve[i] = false;
+    }
+    sieve[2] = true;
+    for(i = 2; i < N; i = i + 1)
+    {
+      if(sieve[i] == true)
+      {
+        answer = answer + i;
+        for(j = i + 1; j < N; j = j + 1)
+        {
+          if(j % i == 0)
+          {
+            sieve[j] = false;
+          }
+        }
+      }
+    }
+    callout("print", "Answer: ");
+    callout("print", "int", answer);
+    return;
+  }
+}
