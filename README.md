@@ -7,17 +7,33 @@ This document describes the syntax and semantics of the language designed as par
 
 In this section we'll proceed to formally define the macro and micro syntax of our language. We'll assume a Top Down approach where we first describe the macro syntax and then describe the micro syntax using context free grammar and regexes.
 
+## Metasyntax
 
-## Macro Syntax
+This section describes the grouping and quantitative notations used to describe our grammar.
+
+```
+<> -> Non terminal
+
+[x] -> Zero or one occurrence of x
+
+x* -> Zero or more occurrences of x
+
+x+ -> Comma separated list of one or more occurrernces of x
+
+{ } -> Grouping
+
+| -> Alternatives (or)
+```
+## Macrosyntax
 
 ```
 <program> -> class Program '{' <var_decl>* <method_decl>* '}'
 
-<field_decl> -> <type> {<id>
+<var_decl> -> <type> {<id>
                 | <id>'['<int_literal>']'
                 | <id>'['<int_literal>']['<int_literal>']'}
 
-<var_decl> -> {<type> | <type>'['<int_literal>']' | void} <id>([{<type> <id> {'['<int_literal>']' | '['<int_literal>']['<int_literal>']' }}+]) <block>
+<method_decl> -> {<type> | <type>'['<int_literal>']' | <type>'['<int_literal>']['<int_literal>']' | void} <id>'('[{<type> <id> {'['<int_literal>']' | '['<int_literal>']['<int_literal>']'}+]')' <block>
 
 <block> -> '{' <var_decl>* <statement>* '}'
 
@@ -26,7 +42,7 @@ In this section we'll proceed to formally define the macro and micro syntax of o
 <statement> -> <location> '=' <expr>
               | <method_call>
               | if(<expr>) <block> [else <block>]
-              | <expr> ? <expr> : <expr>
+              | <expr> ? <statement> : <statement>
               | while(<expr>) <block>
               | for(<id>=<expr>; [<expr>]; [<expr>]) <block>
               | return [<expr>]
@@ -52,8 +68,11 @@ In this section we'll proceed to formally define the macro and micro syntax of o
 
 <bin_op> -> <arith_op> | <rel_op> | <eq_op> | <cond_op>
 
+<literal> -> <int_literal> | <char_literal> | <bool_literal>
+
 ```
 ## Microsyntax
+
 
 | RegEx | Token |
 |:------:|:------:|
@@ -65,7 +84,7 @@ In this section we'll proceed to formally define the macro and micro syntax of o
 | == \| !=   |  <eq_op> |
 | <= \| >= \| < \| >  |   <rel_op> |
 | [\\+ \\- \\* / %] | <arith_op> |
-| \|\||&& | <cond_op> |
+| \\\| \\\| \|&& | <cond_op> |
 | \+= \| \-= \| = | <assign_op> |
 | int \| boolean \| char | \<type>  | //Oh no, decaf doesn't support chars and strings at alll!!
 
@@ -88,3 +107,11 @@ The compiler would need to keep tab of variables declared in given environments
 
 ### Method Call Arguments and Method Parameter Mismatch
 Compiler checks every method call against method definition.
+
+## Modifications from Decaf
+
+* Ability to handle strings and characters
+* Arguments to methods and method return types can be arrays
+* 'While' control flow function has been added
+* Ternary operator
+* Restricted function calls - can only use callout to call functions with arguments. This makes it easier to parse. 
